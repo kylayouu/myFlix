@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 	res.send('Watching movies is definitely one of my hobbies!');
 });
 
-app.use('documentation.html', express.static('public'));
+app.use(express.static('public'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
