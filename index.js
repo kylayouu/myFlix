@@ -34,7 +34,7 @@ let topTenMovies = [
     director: 'Adam Shankman'
   },
 	{
-    title: 'This Means Wars',
+    title: 'This Means War',
     director: 'McG'
   },
 	{
