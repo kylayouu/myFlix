@@ -22,14 +22,16 @@
 					<td>Return a list of ALL movies to the user</td>
 					<td>/movies</td>
 					<td>GET</td>
-					<td>A JSON object holding data about the list of all movies:
+					<td>A JSON object holding data about the list of all movies. Example:
 						{
 							title: '13 Hours: The Secret Soldiers of Benghazi',
+							genre: 'Action'
 							director: 'Michael Bay'
 						},
 						{
 							title: 'Lord of the Rings: The Fellowship of the Ring',
-							direction: 'Peter Jackson'
+							genre: 'Fantasy'
+							director: 'Peter Jackson'
 						}
 					</td>
 				</tr>
@@ -37,7 +39,7 @@
 					<td>Return data about a single movie by title to the user</td>
 					<td>/movies/:title</td>
 					<td>GET</td>
-					<td>A JSON object holding data about a single movie:
+					<td>A JSON object holding data about a single movie. Example:
 						{
 							"title": "13 Hours",
 							"description": "sample-description",
@@ -57,7 +59,7 @@
 					<td>Return data about a director (bio, birth year, death year) by name</td>
 					<td>/directors/:name</td>
 					<td>GET</td>
-					<td>A JSON object holding data about directors:
+					<td>A JSON object holding data about directors. Example:
 						{
 							"name": "Michael Bay",
 							"bio": "bio-description",
@@ -70,7 +72,7 @@
 					<td>Allow new users to register</td>
 					<td>/user/register</td>
 					<td>POST</td>
-					<td>A JSON object holding data containing user information:
+					<td>A JSON object holding data containing user information. Example:
 						{
 							"first_name": "Kyla",
 							"last_name": "Quilos",
