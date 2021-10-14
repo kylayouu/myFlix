@@ -6,9 +6,12 @@ const Users = Models.User;
 mongoose.connect('mongodb://localhost:27017/showFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const express = require('express'),
-	morgan = require('morgan');
+	morgan = require('morgan'),
+  bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('common'));
 
 let topTenMovies = [
