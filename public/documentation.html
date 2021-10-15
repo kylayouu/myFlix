@@ -4,10 +4,10 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>myFlix API</title>
+		<title>showFlix API</title>
 	</head>
 	<body class='container'>
-		<h1>myFlix API</h1>
+		<h1>showFlix API</h1>
 		<p>This app is to provide information about all kinds of movies, their genres and directors! This is the one stop shop for movie lovers who want to learn about or keep track of movies they adore by creating a list of their favorites! All this data about these different movies will be brought by this myFlix API.</p>
 
 		<table>
@@ -37,7 +37,7 @@
 				</tr>
 				<tr>
 					<td>Return data about a single movie by title to the user</td>
-					<td>/movies/:title</td>
+					<td>/movies/:Title</td>
 					<td>GET</td>
 					<td>A JSON object holding data about a single movie. Example:
 						{
@@ -51,20 +51,20 @@
 				</tr>
 				<tr>
 					<td>Return data about a genre by name/title</td>
-					<td>/genres/:name</td>
+					<td>/genres/:Name</td>
 					<td>GET</td>
 					<td>A JSON object holding data about a genre by name</td>
 				</tr>
 				<tr>
 					<td>Return data about a director (bio, birth year, death year) by name</td>
-					<td>/directors/:name</td>
+					<td>/directors/:Name</td>
 					<td>GET</td>
 					<td>A JSON object holding data about directors. Example:
 						{
 							"name": "Michael Bay",
 							"bio": "bio-description",
-							"birth_year": "0000",
-							"death_year": "0000",
+							"birth": "0000",
+							"death": "0000",
 						}
 					</td>
 				</tr>
@@ -74,11 +74,10 @@
 					<td>POST</td>
 					<td>A JSON object holding data containing user information. Example:
 						{
-							"first_name": "Kyla",
-							"last_name": "Quilos",
-							"email": "abc@gmail.com",
-							"username": "kylayouu",
-							"password": "123456"
+							"Username": "kylayouu",
+							"Password": "123456",
+							"Email": "abc@gmail.com",
+							"FavoriteMovies": [],	
 						}
 					</td>
 				</tr>
@@ -86,25 +85,46 @@
 					<td>Allow users to update their user info</td>
 					<td>/users/:username/edit_profile</td>
 					<td>PUT</td>
-					<td>Text displaying the update has been successful.</td>
+					<td>A JSON object with updated user info. Example:
+						{
+							"Username": "kylayouu",
+							"Password": "123456",
+							"Email": "abc@gmail.com",
+							"FavoriteMovies": []
+						}
+					</td>
 				</tr>
 				<tr>
 					<td>Allow users to add a movie to their list of favorites</td>
 					<td>/users/:username/favorites</td>
 					<td>POST</td>
-					<td>Text displaying a movie has been added to the user's list of favorites.</td>
+					<td>A JSON object with the updated list of favorites for a user. Example:
+						{
+							"Username": "kylayouu",
+							"Password": "123456",
+							"Email": "abc@gmail.com",
+							"FavoriteMovies": [ "id:1", "id:2" ]
+						}
+					</td>
 				</tr>
 				<tr>
 					<td>Allow users to remove a movie from their list of favorites</td>
 					<td>/users/:username/favorites</td>
 					<td>DELETE</td>
-					<td>Text displaying a movie has been removed from the user's list of favorites.</td>
+					<td>A JSON object with the updated list of favorites for a user. Example:
+						{
+							"Username": "kylayouu",
+							"Password": "123456",
+							"Email": "abc@gmail.com",
+							"FavoriteMovies": [ "id:1" ]
+						}
+					</td>
 				</tr>
 				<tr>
 					<td>Allow existing users to deregister</td>
 					<td>/users/:username</td>
 					<td>DELETE</td>
-					<td>Text displaying user has been removed.</td>
+					<td>Text displaying user has been removed. Example: "kylayouu was successfully deleted."</td>
 				</tr>
 			</tbody>
 		</table>
