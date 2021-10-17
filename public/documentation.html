@@ -83,7 +83,7 @@
 				</tr>
 				<tr>
 					<td>Allow users to update their user info</td>
-					<td>/users/:username/edit_profile</td>
+					<td>/users/:username</td>
 					<td>PUT</td>
 					<td>A JSON object with updated user info. Example:
 						{
@@ -96,7 +96,7 @@
 				</tr>
 				<tr>
 					<td>Allow users to add a movie to their list of favorites</td>
-					<td>/users/:username/favorites</td>
+					<td>/users/:username/favorites/:MovieID</td>
 					<td>POST</td>
 					<td>A JSON object with the updated list of favorites for a user. Example:
 						{
@@ -109,7 +109,7 @@
 				</tr>
 				<tr>
 					<td>Allow users to remove a movie from their list of favorites</td>
-					<td>/users/:username/favorites</td>
+					<td>/users/:username/favorites/:MovieID</td>
 					<td>DELETE</td>
 					<td>A JSON object with the updated list of favorites for a user. Example:
 						{
