@@ -87,7 +87,7 @@ app.post('/users/register', (req, res) => {
     });
 });
 
-app.put('/users/:username', (req, res) => {
+app.put('/users/:Username', (req, res) => {
 	Users.findOneAndUpdate({Username: req.params.Username}, { $set:
     {
       Username: req.body.Username,
@@ -118,7 +118,7 @@ app.post('/users/:Username/favorites/:MovieID', (req,res) => {
   });
 });
 
-app.delete('/users/:username/favorites/:MovieID', (req, res) => {
+app.delete('/users/:Username/favorites/:MovieID', (req, res) => {
   Users.findOneAndUpdate({Username: req.params.Username},
     { $pull: {FavoriteMovies: req.params.MovieID} },
     { new: true },
@@ -132,7 +132,7 @@ app.delete('/users/:username/favorites/:MovieID', (req, res) => {
   });
 });
 
-app.delete('/users', (req, res) => {
+app.delete('/users/:Username', (req, res) => {
 	Users.findOneAndRemove({Username: req.params.Username}).then((user) => {
     if (!user) {
       res.status(400).send(req.params.Username + ' was not found.');
