@@ -61,7 +61,7 @@ app.get('/directors/:Name', (req, res) => {
 });
 
 app.post('/users/register', (req, res) => {
-	Users.findOneAndUpdate( {Username: req.body.Username} ).then((user) => {
+	Users.findOne( {Username: req.body.Username} ).then((user) => {
     if (user) {
       return res.status(400).send(req.body.Username + ' already exists');
     } else {
@@ -71,6 +71,9 @@ app.post('/users/register', (req, res) => {
           Email: req.body.Email,
           Birthday: req.body.Birthday,
           FavoriteMovies: req.body.FavoriteMovies
+        })
+        .then((user) => {
+          res.status(201).json(user)
         })
         .catch((err) => {
           console.error(err);
@@ -84,7 +87,7 @@ app.post('/users/register', (req, res) => {
     });
 });
 
-app.put('/users/:username/edit_profile', (req, res) => {
+app.put('/users/:username', (req, res) => {
 	Users.findOneAndUpdate({Username: req.params.Username}, { $set:
     {
       Username: req.body.Username,
@@ -101,26 +104,32 @@ app.put('/users/:username/edit_profile', (req, res) => {
   });
 });
 
-app.post('/users/:username/favorites', (req, res) => {
+app.post('/users/:Username/favorites/:MovieID', (req,res) => {
   Users.findOneAndUpdate({Username: req.params.Username},
-    { $push: {FavoriteMovies: req.params.MovieID} }).then((updatedFavorites) => {
-      res.json(updatedFavorites)
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ' + err)
-    });
+    { $push: {FavoriteMovies: req.params.MovieID} },
+    { new: true },
+    (err, updatedUser) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      } else {
+        res.json(updatedUser);
+      }
+  });
 });
 
-app.delete('/users/:username/favorites', (req, res) => {
-	Users.findOneAndUpdate({Username: req.params.Username},
-    { $pull: {FavoriteMovies: req.params.MovieID} }).then((updatedFavorites) => {
-      res.json(updatedFavorites)
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ' + err)
-    });
+app.delete('/users/:username/favorites/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({Username: req.params.Username},
+    { $pull: {FavoriteMovies: req.params.MovieID} },
+    { new: true },
+    (err, updatedUser) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      } else {
+        res.json(updatedUser);
+      }
+  });
 });
 
 app.delete('/users', (req, res) => {
