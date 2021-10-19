@@ -14,13 +14,19 @@ const express = require('express'),
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+let auth = require('./auth')(app);  // (app) ensures Express is available in your auth.js file
+
+const passport = require('passport');
+require('./passport');
+
 app.use(morgan('common'));
 
 app.get('/', (req, res) => {
 	res.send('Watching movies is definitely one of my hobbies!');
 });
 
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Movies.find().then((movies) => {
     res.status(201).json(movies);
   })
