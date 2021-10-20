@@ -1,25 +1,30 @@
-const mongoose = require('mongoose');
-const Models = require('./models.js');
+const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
+const app = express();
+const mongoose = require('mongoose');
+
+const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 const Genres = Models.Genre;
 const Directors = Models.Director;
+
 mongoose.connect('mongodb://localhost:27017/showFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const express = require('express'),
-	morgan = require('morgan'),
-  bodyParser = require('body-parser');
-
-const app = express();
+// use body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-let auth = require('./auth')(app);  // (app) ensures Express is available in your auth.js file
 
+// authorization
+// (app) ensures Express is available in your auth.js file
+let auth = require('./auth.js')(app);
 const passport = require('passport');
 require('./passport');
 
+// use of morgan
 app.use(morgan('common'));
 
 app.get('/', (req, res) => {
