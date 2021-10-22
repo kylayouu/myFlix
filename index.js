@@ -4,6 +4,10 @@ const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
 
 const app = express();
+
+const cors = require('cors');
+app.use(cors());
+
 const mongoose = require('mongoose');
 
 const Models = require('./models.js');
@@ -12,7 +16,8 @@ const Users = Models.User;
 const Genres = Models.Genre;
 const Directors = Models.Director;
 
-mongoose.connect('mongodb://localhost:27017/showFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://localhost:27017/showFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect( process.env.CONNECTION_URI , { useNewUrlParser: true, useUnifiedTopology: true });
 
 // use body-parser
 app.use(bodyParser.json());
@@ -176,6 +181,7 @@ app.use((err, req, res, next) => {
   res.status(500).send('There has been an error!');
 });
 
-app.listen(8080, () => {
-	console.log('Your app is listening on port 8080.');
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+ console.log('Listening on Port ' + port);
 });
