@@ -1,5 +1,7 @@
-// Authenticates registered users to log in
-// Will generate a JWT for the user
+/**
+ * Authenticates registered users to log in
+ * Will generate a JWT for the user
+ */
 
 const jwtSecret = 'your_jwt_secret';
 
@@ -15,7 +17,11 @@ let generateJWTToken = (user) => {
 	});
 }
 
-// POST login
+/**
+ * log in router
+ * @method POST
+ * @param {*} router 
+ */
 module.exports = (router) => {
 	router.post('/login', (req, res) => {
 		passport.authenticate('local', { session: false }, (error, user, info) => {
